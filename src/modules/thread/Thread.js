@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 import {View, Text, TouchableHighlight} from 'react-native';
 
-export default class Thread extends React.Component {
+export default class Thread extends Component {
   constructor() {
     super();
     this.onPress = this.onPress.bind(this);
@@ -22,3 +22,8 @@ export default class Thread extends React.Component {
     );
   }
 }
+
+Thread.propTypes = {
+  currentView: PropTypes.string.isRequired,
+  navigateToThreadList: PropTypes.func.isRequired
+};
