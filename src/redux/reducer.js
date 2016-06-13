@@ -1,5 +1,7 @@
-import {Map} from 'immutable';
+import {combineReducers} from 'redux';
 
-export default function reducer(state = Map()) {
-  return state;
-}
+import AppStateReducer from '../modules/AppState';
+
+export default combineReducers({
+  appState: AppStateReducer
+});

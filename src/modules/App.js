@@ -1,12 +1,15 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+
+import {NAVIGATION} from './AppState';
+import ThreadListContainer from './threadList/ThreadListContainer';
+import ThreadContainer from './thread/ThreadContainer';
 
 export default class App extends React.Component {
   render() {
-    return (
-      <View>
-        <Text>Hello World!</Text>
-      </View>
-    );
+    if (this.props.currentView === NAVIGATION.THREAD_LIST) {
+      return <ThreadListContainer />;
+    }
+
+    return <ThreadContainer />;
   }
 }
