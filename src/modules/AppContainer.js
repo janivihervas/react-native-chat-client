@@ -1,15 +1,18 @@
 import {connect} from 'react-redux';
 
 import App from './App';
-import {navigate} from './AppState';
+import {navigate, NAVIGATION} from './AppState';
 
 export default connect(
   state => ({
     currentView: state.appState.get('currentView')
   }),
   dispatch => ({
-    navigate: target => {
-      dispatch(navigate(target));
+    navigateToThread: () => {
+      dispatch(navigate('thread'));
+    },
+    navigateToThreadList: () => {
+      dispatch(navigate(NAVIGATION.THREAD_LIST));
     }
   })
 )(App);
