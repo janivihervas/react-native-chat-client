@@ -3,6 +3,7 @@ import {assert} from 'chai';
 import {Map} from 'immutable';
 
 import reducer from '../../../src/redux/reducer';
+import {NAVIGATION} from '../../../src/modules/app/AppState';
 
 describe('Reducer', () => {
 
@@ -10,7 +11,7 @@ describe('Reducer', () => {
     assert.isFunction(reducer);
     assert.deepEqual(reducer(), {
       appState: Map({
-        currentView: 'thread list'
+        currentView: NAVIGATION.INDEX_VIEW
       })
     });
   });

@@ -4,8 +4,9 @@ import {describe, it, beforeEach} from 'mocha';
 import {assert} from 'chai';
 
 import App from '../../../src/modules/app/App';
-import ThreadList from '../../../src/modules/threadList/ThreadList';
-import Thread from '../../../src/modules/thread/Thread';
+import IndexView from '../../../src/modules/indexView/IndexView';
+import ThreadView from '../../../src/modules/threadView/ThreadView';
+import {NAVIGATION} from '../../../src/modules/app/AppState';
 
 describe('App', () => {
   let renderer;
@@ -14,20 +15,34 @@ describe('App', () => {
     renderer = TestUtils.createRenderer();
   });
 
-  it('should render ThreadList', () => {
-    const fn = () => {};
-    renderer.render(<App currentView='thread list' navigateToThread={fn} navigateToThreadList={fn}/>);
+  it('should render IndexView', () => {
+    const fn = () => {
+    };
+    renderer.render((
+      <App
+        currentView={NAVIGATION.INDEX_VIEW}
+        navigateToIndexView={fn}
+        navigateToThreadView={fn}
+      />
+    ));
     const el = renderer.getRenderOutput();
 
-    assert.deepEqual(el, <ThreadList currentView='thread list' navigateToThread={fn}/>);
+    assert.deepEqual(el, <IndexView currentView={NAVIGATION.INDEX_VIEW} navigateToThreadView={fn}/>);
   });
 
-  it('should render Thread', () => {
-    const fn = () => {};
-    renderer.render(<App currentView='thread' navigateToThread={fn} navigateToThreadList={fn}/>);
+  it('should render ThreadView', () => {
+    const fn = () => {
+    };
+    renderer.render((
+      <App
+        currentView={NAVIGATION.THREAD_VIEW}
+        navigateToIndexView={fn}
+        navigateToThreadView={fn}
+      />
+    ));
     const el = renderer.getRenderOutput();
 
-    assert.deepEqual(el, <Thread currentView='thread' navigateToThreadList={fn}/>);
+    assert.deepEqual(el, <ThreadView currentView={NAVIGATION.THREAD_VIEW} navigateToIndexView={fn}/>);
   });
 
 });

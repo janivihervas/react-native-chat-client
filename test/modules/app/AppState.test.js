@@ -2,7 +2,7 @@ import {describe, it, beforeEach} from 'mocha';
 import {assert} from 'chai';
 import {Map} from 'immutable';
 
-import AppStateReducer, {navigate} from '../../../src/modules/app/AppState';
+import AppStateReducer, {navigate, NAVIGATION} from '../../../src/modules/app/AppState';
 
 describe('AppState', () => {
   let initialState;
@@ -13,7 +13,7 @@ describe('AppState', () => {
 
   it('AppStateReducer', () => {
     assert.deepEqual(initialState, Map({
-      currentView: 'thread list'
+      currentView: NAVIGATION.INDEX_VIEW
     }));
 
     assert.equal(initialState, AppStateReducer());

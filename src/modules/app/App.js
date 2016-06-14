@@ -1,24 +1,24 @@
 import React, {Component, PropTypes} from 'react';
 
 import {NAVIGATION} from './AppState';
-import ThreadList from '../threadList/ThreadList';
-import Thread from '../thread/Thread';
+import IndexView from '../indexView/IndexView';
+import ThreadView from '../threadView/ThreadView';
 
 export default class App extends Component {
   render() {
-    if (this.props.currentView === NAVIGATION.THREAD_LIST) {
+    if (this.props.currentView === NAVIGATION.INDEX_VIEW) {
       return (
-        <ThreadList
+        <IndexView
           currentView={this.props.currentView}
-          navigateToThread={this.props.navigateToThread}
+          navigateToThreadView={this.props.navigateToThreadView}
         />
       );
     }
 
     return (
-      <Thread
+      <ThreadView
         currentView={this.props.currentView}
-        navigateToThreadList={this.props.navigateToThreadList}
+        navigateToIndexView={this.props.navigateToIndexView}
       />
     );
   }
@@ -26,6 +26,6 @@ export default class App extends Component {
 
 App.propTypes = {
   currentView: PropTypes.string.isRequired,
-  navigateToThread: PropTypes.func.isRequired,
-  navigateToThreadList: PropTypes.func.isRequired
+  navigateToThreadView: PropTypes.func.isRequired,
+  navigateToIndexView: PropTypes.func.isRequired
 };

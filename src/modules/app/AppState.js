@@ -12,11 +12,12 @@ export function navigate(target) {
 }
 
 export const NAVIGATION = {
-  THREAD_LIST: 'thread list'
+  INDEX_VIEW: 'INDEX_VIEW',
+  THREAD_VIEW: 'THREAD_VIEW'
 };
 
 const initialState = Map({
-  currentView: NAVIGATION.THREAD_LIST
+  currentView: NAVIGATION.INDEX_VIEW
 });
 
 export default function AppStateReducer(state = initialState, action = {}) {

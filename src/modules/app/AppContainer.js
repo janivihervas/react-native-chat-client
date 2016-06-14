@@ -8,11 +8,11 @@ export default connect(
     currentView: state.appState.get('currentView')
   }),
   dispatch => ({
-    navigateToThread: () => {
-      dispatch(navigate('thread'));
+    navigateToThreadView: () => {
+      dispatch(navigate(NAVIGATION.THREAD_VIEW));
     },
-    navigateToThreadList: () => {
-      dispatch(navigate(NAVIGATION.THREAD_LIST));
+    navigateToIndexView: () => {
+      dispatch(navigate(NAVIGATION.INDEX_VIEW));
     }
   })
 )(App);
