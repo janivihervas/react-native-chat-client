@@ -4,8 +4,8 @@ import {createStore} from 'redux';
 import {AppRegistry, BackAndroid} from 'react-native';
 
 import reducer from './src/redux/reducer';
-import AppContainer from './src/modules/AppContainer';
-import {navigate, NAVIGATION} from './src/modules/AppState';
+import AppContainer from './src/modules/app/AppContainer';
+import {navigate, NAVIGATION} from './src/modules/app/AppState';
 
 const store = createStore(reducer);
 
