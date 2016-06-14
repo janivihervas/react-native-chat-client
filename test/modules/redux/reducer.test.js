@@ -1,6 +1,5 @@
 import {describe, it} from 'mocha';
 import {assert} from 'chai';
-import {Map} from 'immutable';
 
 import reducer from '../../../src/redux/reducer';
 import {NAVIGATION} from '../../../src/modules/app/AppState';
@@ -9,10 +8,12 @@ describe('Reducer', () => {
 
   it('combined reducers', () => {
     assert.isFunction(reducer);
-    assert.deepEqual(reducer(), {
-      appState: Map({
-        currentView: NAVIGATION.INDEX_VIEW
-      })
-    });
+    const initialState = reducer();
+    assert.isObject(initialState);
+    assert.isOk(initialState.appState);
+    assert.isOk(initialState.users);
+    assert.isOk(initialState.threads);
+    assert.isOk(initialState.messages);
+    assert.equal(initialState.appState.get('currentView'), NAVIGATION.INDEX_VIEW);
   });
 });
