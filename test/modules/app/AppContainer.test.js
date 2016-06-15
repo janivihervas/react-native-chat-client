@@ -4,7 +4,7 @@ import {describe, it, beforeEach} from 'mocha';
 import {assert} from 'chai';
 
 import AppContainer from '../../../src/modules/app/AppContainer';
-import getStore from '../../getStore';
+import configureStore from '../../../src/redux/configureStore';
 
 describe('AppContainer', () => {
   let el;
@@ -12,7 +12,7 @@ describe('AppContainer', () => {
 
   beforeEach(() => {
     const renderer = TestUtils.createRenderer();
-    store = getStore();
+    store = configureStore();
     renderer.render(<AppContainer store={store}/>);
     el = renderer.getRenderOutput();
   });
@@ -21,14 +21,8 @@ describe('AppContainer', () => {
     assert.isString(el.props.currentView);
   });
 
-  // TODO: move these to IndexViewContainer and ThreadViewContainer
+  // TODO: move this to ThreadViewContainer
 
-  // it('navigateToThreadView', () => {
-  //   el.props.navigateToThreadView();
-  //   const state = store.getState();
-  //
-  //   assert.equal(state.appState.get('currentView'), NAVIGATION.THREAD_VIEW);
-  // });
   //
   // it('navigateToIndexView', () => {
   //   el.props.navigateToIndexView();

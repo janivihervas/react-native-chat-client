@@ -7,6 +7,12 @@ export default class IndexView extends Component {
     this.onPress = this.onPress.bind(this);
   }
 
+  componentDidMount() {
+    if (!this.props.threadsFetched) {
+      this.props.fetchThreads();
+    }
+  }
+
   onPress() {
     this.props.navigateToThreadView();
   }
@@ -18,11 +24,15 @@ export default class IndexView extends Component {
         <TouchableHighlight onPress={this.onPress}>
           <Text>Go to thread view</Text>
         </TouchableHighlight>
+        <Text>{JSON.stringify(this.props.threads)}</Text>
       </View>
     );
   }
 }
 
 IndexView.propTypes = {
-  navigateToThreadView: PropTypes.func.isRequired
+  navigateToThreadView: PropTypes.func.isRequired,
+  threadsFetched: PropTypes.bool.isRequired,
+  fetchThreads: PropTypes.func.isRequired,
+  threads: PropTypes.array.isRequired
 };

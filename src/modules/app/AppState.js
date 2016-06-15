@@ -19,7 +19,7 @@ export const NAVIGATION = {
 const initialState = Map({
   currentView: NAVIGATION.INDEX_VIEW,
   currentUser: Map({
-    id: 0,
+    id: '0',
     name: 'Current User'
   })
 });

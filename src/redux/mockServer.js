@@ -1,13 +1,17 @@
-import {Map, List, fromJS} from 'immutable';
-import {v4 as uuid} from 'uuid';
-import {NAVIGATION} from '../modules/app/AppState';
+import {List, fromJS} from 'immutable';
+import Promise from 'bluebird';
 
 const limit = 5;
 
-let users = {};
+let users = {
+  '0': {
+    name: 'Current user',
+    threads: []
+  }
+};
 
-for (let i = 0; i < limit; i++) {
-  users[uuid()] = {name: `Name${i}`, threads: []};
+for (let i = 1; i < limit; i++) {
+  users['' + i] = {name: `Name${i}`, threads: []};
 }
 
 const userIds = Object.keys(users);
@@ -22,10 +26,10 @@ function exclusiveRandomInt(high, ...exclusives) {
   }
   return result;
 }
-
+let threadId = 0;
 for (let i = 0; i < limit; i++) {
-  const id0 = uuid();
-  const id1 = uuid();
+  const id0 = '' + threadId++;
+  const id1 = '' + threadId++;
 
   const userPrivate = exclusiveRandomInt(limit - 1, i);
   threads[id0] = {
@@ -67,12 +71,13 @@ function randomDate(start, end) {
 
 const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin varius sed elit quis auctor.';
 let messages = {};
+let messageId = 0;
 
 for (let i = 0; i < threadIds.length; i++) {
   const count = exclusiveRandomInt(10, 0, 1, 2);
   for (let j = 0; j < count; j++) {
     const participants = threads.getIn([threadIds[i], 'participants']).toArray();
-    const id = uuid();
+    const id = '' + messageId++;
     let then = new Date();
     then = +then - 3 * 86400000;
     then = new Date(then);
@@ -96,11 +101,43 @@ messages = fromJS(messages);
 const state = {
   users,
   threads,
-  messages,
-  appState: Map({
-    currentUser: userIds[0],
-    currentView: NAVIGATION.INDEX_VIEW
-  })
+  messages
 };
 
-export default state;
+export function fetchThreads(user) {
+  return new Promise(resolve => {
+    const _threads = state.threads
+      .filter(d => d.get('participants').includes(user))
+      .map((thread, id) => {
+        const participants = thread.get('participants')
+          .filter(participant => user !== participant)
+          .map(participant => state.users.getIn([participant, 'name']))
+          .toArray();
+
+        const lastMessage = thread.get('messages')
+          .map(message => state.messages.get(message))
+          .sort((a, b) => a.get('time') < b.get('time'))
+          .take(1)
+          .map(message => message.set('author', state.users.getIn([message.get('author'), 'name'])))
+          .map(message => ({
+            author: message.get('author'),
+            time: message.get('time'),
+            text: message.get('text')
+          }))
+          .first();
+
+        return {
+          id,
+          participants,
+          lastMessage
+        };
+      })
+      .toList()
+      .toJS();
+
+    setTimeout(() => {
+      resolve(_threads);
+    });
+  });
+}
+

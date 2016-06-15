@@ -1,13 +1,12 @@
 import React from 'react';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
 import {AppRegistry, BackAndroid} from 'react-native';
 
-import reducer from './src/redux/reducer';
+import configureStore from './src/redux/configureStore';
 import AppContainer from './src/modules/app/AppContainer';
 import {navigate, NAVIGATION} from './src/modules/app/AppState';
 
-const store = createStore(reducer);
+const store = configureStore();
 
 class ReactNativeChatClient extends React.Component {
   constructor() {

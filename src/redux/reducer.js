@@ -1,13 +1,13 @@
-import {combineReducers} from 'redux';
+import {combineReducers} from 'redux-loop';
 
-import appState from '../modules/app/AppState';
+import app from '../modules/app/AppState';
 import users from './UsersState';
-import indexViewState from '../modules/indexView/IndexViewState';
+import index from '../modules/indexView/IndexViewState';
 import messages from './MessagesState';
 
 export default combineReducers({
-  appState,
+  app,
   users,
-  indexViewState,
+  index,
   messages
 });

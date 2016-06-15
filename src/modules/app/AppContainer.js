@@ -4,6 +4,7 @@ import App from './App';
 
 export default connect(
   state => ({
-    currentView: state.appState.get('currentView')
+    currentView: state.app.get('currentView'),
+    currentUser: state.app.get('currentUser').toJS()
   })
 )(App);

@@ -9,7 +9,7 @@ export default class App extends Component {
   render() {
     switch (this.props.currentView) {
       case NAVIGATION.INDEX_VIEW: {
-        return <IndexViewContainer />;
+        return <IndexViewContainer currentUser={this.props.currentUser}/>;
       }
       case NAVIGATION.THREAD_VIEW: {
         return <ThreadViewContainer />;
@@ -24,5 +24,6 @@ export default class App extends Component {
 }
 
 App.propTypes = {
-  currentView: PropTypes.string.isRequired
+  currentView: PropTypes.string.isRequired,
+  currentUser: PropTypes.object.isRequired
 };
