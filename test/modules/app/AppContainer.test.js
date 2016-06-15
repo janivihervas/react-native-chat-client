@@ -4,7 +4,6 @@ import {describe, it, beforeEach} from 'mocha';
 import {assert} from 'chai';
 
 import AppContainer from '../../../src/modules/app/AppContainer';
-import {NAVIGATION} from '../../../src/modules/app/AppState';
 import getStore from '../../getStore';
 
 describe('AppContainer', () => {
@@ -20,22 +19,22 @@ describe('AppContainer', () => {
 
   it('should pass props', () => {
     assert.isString(el.props.currentView);
-    assert.isFunction(el.props.navigateToThreadView);
-    assert.isFunction(el.props.navigateToIndexView);
   });
 
-  it('navigateToThreadView', () => {
-    el.props.navigateToThreadView();
-    const state = store.getState();
+  // TODO: move these to IndexViewContainer and ThreadViewContainer
 
-    assert.equal(state.appState.get('currentView'), NAVIGATION.THREAD_VIEW);
-  });
-
-  it('navigateToIndexView', () => {
-    el.props.navigateToIndexView();
-    const state = store.getState();
-
-    assert.equal(state.appState.get('currentView'), NAVIGATION.INDEX_VIEW);
-  });
+  // it('navigateToThreadView', () => {
+  //   el.props.navigateToThreadView();
+  //   const state = store.getState();
+  //
+  //   assert.equal(state.appState.get('currentView'), NAVIGATION.THREAD_VIEW);
+  // });
+  //
+  // it('navigateToIndexView', () => {
+  //   el.props.navigateToIndexView();
+  //   const state = store.getState();
+  //
+  //   assert.equal(state.appState.get('currentView'), NAVIGATION.INDEX_VIEW);
+  // });
 
 });

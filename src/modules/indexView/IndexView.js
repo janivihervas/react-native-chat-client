@@ -14,7 +14,7 @@ export default class IndexView extends Component {
   render() {
     return (
       <View>
-        <Text>{this.props.currentView}</Text>
+        <Text>Index</Text>
         <TouchableHighlight onPress={this.onPress}>
           <Text>Go to thread view</Text>
         </TouchableHighlight>
@@ -24,6 +24,5 @@ export default class IndexView extends Component {
 }
 
 IndexView.propTypes = {
-  currentView: PropTypes.string.isRequired,
   navigateToThreadView: PropTypes.func.isRequired
 };

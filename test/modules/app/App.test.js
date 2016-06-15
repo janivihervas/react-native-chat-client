@@ -4,8 +4,8 @@ import {describe, it, beforeEach} from 'mocha';
 import {assert} from 'chai';
 
 import App from '../../../src/modules/app/App';
-import IndexView from '../../../src/modules/indexView/IndexView';
-import ThreadView from '../../../src/modules/threadView/ThreadView';
+import IndexViewContainer from '../../../src/modules/indexView/IndexViewContainer';
+import ThreadViewContainer from '../../../src/modules/threadView/ThreadViewContainer';
 import {NAVIGATION} from '../../../src/modules/app/AppState';
 
 describe('App', () => {
@@ -15,7 +15,7 @@ describe('App', () => {
     renderer = TestUtils.createRenderer();
   });
 
-  it('should render IndexView', () => {
+  it('should render IndexViewContainer', () => {
     const fn = () => {
     };
     renderer.render((
@@ -27,10 +27,10 @@ describe('App', () => {
     ));
     const el = renderer.getRenderOutput();
 
-    assert.deepEqual(el, <IndexView currentView={NAVIGATION.INDEX_VIEW} navigateToThreadView={fn}/>);
+    assert.deepEqual(el, <IndexViewContainer />);
   });
 
-  it('should render ThreadView', () => {
+  it('should render ThreadViewContainer', () => {
     const fn = () => {
     };
     renderer.render((
@@ -42,7 +42,7 @@ describe('App', () => {
     ));
     const el = renderer.getRenderOutput();
 
-    assert.deepEqual(el, <ThreadView currentView={NAVIGATION.THREAD_VIEW} navigateToIndexView={fn}/>);
+    assert.deepEqual(el, <ThreadViewContainer />);
   });
 
 });

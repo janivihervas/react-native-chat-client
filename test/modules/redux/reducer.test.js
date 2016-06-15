@@ -12,7 +12,7 @@ describe('Reducer', () => {
     assert.isObject(initialState);
     assert.isOk(initialState.appState);
     assert.isOk(initialState.users);
-    assert.isOk(initialState.threads);
+    assert.isOk(initialState.indexViewState);
     assert.isOk(initialState.messages);
     assert.equal(initialState.appState.get('currentView'), NAVIGATION.INDEX_VIEW);
   });

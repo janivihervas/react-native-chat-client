@@ -17,7 +17,11 @@ export const NAVIGATION = {
 };
 
 const initialState = Map({
-  currentView: NAVIGATION.INDEX_VIEW
+  currentView: NAVIGATION.INDEX_VIEW,
+  currentUser: Map({
+    id: 0,
+    name: 'Current User'
+  })
 });
 
 export default function AppStateReducer(state = initialState, action = {}) {

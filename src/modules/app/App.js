@@ -1,31 +1,28 @@
 import React, {Component, PropTypes} from 'react';
+import {Text} from 'react-native';
 
 import {NAVIGATION} from './AppState';
-import IndexView from '../indexView/IndexView';
-import ThreadView from '../threadView/ThreadView';
+import IndexViewContainer from '../indexView/IndexViewContainer';
+import ThreadViewContainer from '../threadView/ThreadViewContainer';
 
 export default class App extends Component {
   render() {
-    if (this.props.currentView === NAVIGATION.INDEX_VIEW) {
-      return (
-        <IndexView
-          currentView={this.props.currentView}
-          navigateToThreadView={this.props.navigateToThreadView}
-        />
-      );
+    switch (this.props.currentView) {
+      case NAVIGATION.INDEX_VIEW: {
+        return <IndexViewContainer />;
+      }
+      case NAVIGATION.THREAD_VIEW: {
+        return <ThreadViewContainer />;
+      }
+      default: {
+        return (
+          <Text>How did you end up here?</Text>
+        );
+      }
     }
-
-    return (
-      <ThreadView
-        currentView={this.props.currentView}
-        navigateToIndexView={this.props.navigateToIndexView}
-      />
-    );
   }
 }
 
 App.propTypes = {
-  currentView: PropTypes.string.isRequired,
-  navigateToThreadView: PropTypes.func.isRequired,
-  navigateToIndexView: PropTypes.func.isRequired
+  currentView: PropTypes.string.isRequired
 };

@@ -2,12 +2,12 @@ import {combineReducers} from 'redux';
 
 import appState from '../modules/app/AppState';
 import users from './UsersState';
-import threads from './ThreadsState';
+import indexViewState from '../modules/indexView/IndexViewState';
 import messages from './MessagesState';
 
 export default combineReducers({
   appState,
   users,
-  threads,
+  indexViewState,
   messages
 });

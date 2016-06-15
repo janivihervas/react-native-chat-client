@@ -1,6 +1,5 @@
 import {describe, it, beforeEach} from 'mocha';
 import {assert} from 'chai';
-import {Map} from 'immutable';
 
 import AppStateReducer, {navigate, NAVIGATION} from '../../../src/modules/app/AppState';
 
@@ -12,9 +11,8 @@ describe('AppState', () => {
   });
 
   it('AppStateReducer', () => {
-    assert.deepEqual(initialState, Map({
-      currentView: NAVIGATION.INDEX_VIEW
-    }));
+    assert.equal(initialState.get('currentView'), NAVIGATION.INDEX_VIEW);
+    assert.isOk(initialState.get('currentUser'));
 
     assert.equal(initialState, AppStateReducer());
   });

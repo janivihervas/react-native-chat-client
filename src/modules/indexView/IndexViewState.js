@@ -1,6 +1,8 @@
-import {Map} from 'immutable';
+import {fromJS} from 'immutable';
 
-const initialState = Map();
+const initialState = fromJS({
+  threads: []
+});
 
 export default function ThreadsStateReducer(state = initialState) {
   return state;
