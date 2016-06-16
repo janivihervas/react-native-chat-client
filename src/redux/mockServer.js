@@ -137,7 +137,7 @@ export function fetchThreads(user) {
 
     setTimeout(() => {
       resolve(_threads);
-    });
+    }, 1000);
   });
 }
 

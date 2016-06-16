@@ -26,3 +26,5 @@ export default class ThreadView extends Component {
 ThreadView.propTypes = {
   navigateToIndexView: PropTypes.func.isRequired
 };
+
+ThreadView.displayName = 'ThreadView';

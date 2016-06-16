@@ -13,3 +13,5 @@ ThreadList.propTypes = {
   navigateToThreadView: PropTypes.func.isRequired,
   threads: PropTypes.array.isRequired
 };
+
+ThreadList.displayName = 'ThreadList';

@@ -27,3 +27,5 @@ App.propTypes = {
   currentView: PropTypes.string.isRequired,
   currentUser: PropTypes.object.isRequired
 };
+
+App.displayName = 'Name';

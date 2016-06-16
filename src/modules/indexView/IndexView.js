@@ -33,3 +33,5 @@ IndexView.propTypes = {
   threads: PropTypes.array.isRequired,
   fetching: PropTypes.bool.isRequired
 };
+
+IndexView.displayName = 'IndexView';
