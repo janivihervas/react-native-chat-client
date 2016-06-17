@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {Text} from 'react-native';
+import {Map} from 'immutable';
 
 import {NAVIGATION} from './AppState';
 import IndexViewContainer from '../indexView/IndexViewContainer';
@@ -25,7 +26,7 @@ export default class App extends Component {
 
 App.propTypes = {
   currentView: PropTypes.string.isRequired,
-  currentUser: PropTypes.object.isRequired
+  currentUser: PropTypes.instanceOf(Map).isRequired
 };
 
 App.displayName = 'Name';

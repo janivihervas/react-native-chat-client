@@ -1,8 +1,10 @@
 import React, {Component, PropTypes} from 'react';
 import {View} from 'react-native';
+import {List} from 'immutable';
 
 import IndexViewHeader from '../../components/IndexViewHeader';
 import ThreadList from '../../components/ThreadList';
+import common from '../../styles/common';
 
 export default class IndexView extends Component {
   componentDidMount() {
@@ -13,7 +15,7 @@ export default class IndexView extends Component {
 
   render() {
     return (
-      <View>
+      <View style={common.fullSize}>
         <IndexViewHeader
           fetching={this.props.fetching}
         />
@@ -30,7 +32,7 @@ IndexView.propTypes = {
   navigateToThreadView: PropTypes.func.isRequired,
   threadsFetched: PropTypes.bool.isRequired,
   fetchThreads: PropTypes.func.isRequired,
-  threads: PropTypes.array.isRequired,
+  threads: PropTypes.instanceOf(List).isRequired,
   fetching: PropTypes.bool.isRequired
 };
 

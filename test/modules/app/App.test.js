@@ -2,6 +2,7 @@ import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 import {describe, it, beforeEach} from 'mocha';
 import {assert} from 'chai';
+import {Map} from 'immutable';
 
 import App from '../../../src/modules/app/App';
 import IndexViewContainer from '../../../src/modules/indexView/IndexViewContainer';
@@ -12,10 +13,10 @@ describe('App', () => {
   let renderer;
   const fn = () => {
   };
-  const user = {
+  const user = Map({
     id: '0',
     name: 'Current User'
-  };
+  });
 
   beforeEach(() => {
     renderer = TestUtils.createRenderer();

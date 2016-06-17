@@ -3,7 +3,9 @@ import {View} from 'react-native';
 import TestUtils from 'react-addons-test-utils';
 import {describe, it} from 'mocha';
 import {assert} from 'chai';
+import {List} from 'immutable';
 
+import {assertReactElements} from '../../helpers';
 import IndexView from '../../../src/modules/indexView/IndexView';
 import IndexViewHeader from '../../../src/components/IndexViewHeader';
 import ThreadList from '../../../src/components/ThreadList';
@@ -18,20 +20,20 @@ describe('IndexView', () => {
         navigateToThreadView={fn}
         threadsFetched={false}
         fetchThreads={fn}
-        threads={[]}
+        threads={List([])}
         fetching={false}
       />
     ));
     const el = renderer.getRenderOutput();
 
-    assert.deepEqual(el, (
+    assertReactElements(el, (
       <View>
         <IndexViewHeader
           fetching={false}
         />
         <ThreadList
           navigateToThreadView={fn}
-          threads={[]}
+          threads={List([])}
         />
       </View>
     ));
@@ -51,7 +53,7 @@ describe('IndexView', () => {
           navigateToThreadView={fn}
           threadsFetched={threadsFetched}
           fetchThreads={fetchThreads}
-          threads={[]}
+          threads={List([])}
           fetching={false}
         />
       ));

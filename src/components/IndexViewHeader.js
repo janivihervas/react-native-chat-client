@@ -1,13 +1,15 @@
 import React, {Component, PropTypes} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
+
 import Spinner from './Spinner';
+import common, {colors} from '../styles/common';
 
 export default class IndexViewHeader extends Component {
   render() {
     const child = this.props.fetching ? <Spinner /> : null;
 
     return (
-      <View style={styles.header}>
+      <View style={[styles.header, common.padding]}>
         <View style={styles.inner}>
           <Text style={styles.headerText}>React Native Chat Client</Text>
         </View>
@@ -27,12 +29,10 @@ IndexViewHeader.displayName = 'IndexViewHeader';
 
 const styles = StyleSheet.create({
   header: {
-    paddingLeft: 15,
-    paddingRight: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
     height: 50,
-    backgroundColor: 'rgb(66, 186, 220)'
+    backgroundColor: colors.blue
   },
   headerText: {
     color: '#fff'

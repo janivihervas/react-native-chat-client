@@ -16,6 +16,18 @@ export function assertReactElements(actual, expected) {
   }
   assert.equal(actual.type.displayName, expected.type.displayName, 'display name');
 
+  const actualProps = Object.keys(actual.props).filter(d => d !== 'children' && d !== 'style');
+  const expectedProps = Object.keys(expected.props).filter(d => d !== 'children' && d !== 'style');
+
+  assert.deepEqual(actualProps, expectedProps);
+
+  for (let i = 0; i < actualProps.length; i++) {
+    assert.deepEqual(
+      actual.props[actualProps[i]],
+      expected.props[expectedProps[i]]
+    );
+  }
+
   /* eslint-disable */
   const actualChildren = Array.isArray(actual.props.children)
     ? actual.props.children
@@ -36,7 +48,7 @@ export function assertReactElements(actual, expected) {
     
     expected: ${JSON.stringify(expectedChildren, null, 4)}`);
 
-  for (var i = 0; i < actualChildren.length; i++) {
+  for (let i = 0; i < actualChildren.length; i++) {
     assertReactElements(actualChildren[i], expectedChildren[i]);
   }
 }
@@ -47,9 +59,9 @@ describe('Test helpers', () => {
     /* eslint-disable */
     let el0 = (
       <View>
-        <View>{null}</View>
-        <View>{}</View>
-        <View>{undefined}</View>
+        <View someProp={true}>{null}</View>
+        <View anotherProp={2}>{}</View>
+        <View test={'test'}>{undefined}</View>
       </View>
     );
     /* eslint-enable */
@@ -61,7 +73,7 @@ describe('Test helpers', () => {
     el0 = (
       <View>
         <View>
-          <View>
+          <View loading={true}>
             <Text/>
           </View>
         </View>
@@ -78,7 +90,7 @@ describe('Test helpers', () => {
     let el1 = (
       <View>
         <View>
-          <View>
+          <View loading={true}>
             <Text/>
           </View>
         </View>
@@ -94,12 +106,22 @@ describe('Test helpers', () => {
 
     el0 = (
       <View>
-        <Text>oig3rngorng</Text>
+        <Text loading={false}>oig3rngorng</Text>
       </View>
     );
     el1 = (
       <View>
-        <Text>ergernenfdfpwef</Text>
+        <Text loading={true}>ergernenfdfpwef</Text>
+      </View>
+    );
+
+    assert.throws(() => {
+      assertReactElements(el0, el1);
+    });
+
+    el1 = (
+      <View>
+        <Text loading={false}>ergernenfdfpwef</Text>
       </View>
     );
 

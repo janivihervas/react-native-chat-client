@@ -7,7 +7,7 @@ import {fetchThreads} from './IndexViewState';
 export default connect(
   state => {
     return {
-      threads: state.index.get('threads').toJS(),
+      threads: state.index.get('threads'),
       threadsFetched: state.index.get('threadsFetched'),
       fetching: state.index.get('fetching')
     };
@@ -17,7 +17,7 @@ export default connect(
       dispatch(navigate(NAVIGATION.THREAD_VIEW));
     },
     fetchThreads: () => {
-      dispatch(fetchThreads(ownProps.currentUser.id));
+      dispatch(fetchThreads(ownProps.currentUser.get('id')));
     }
   })
 )(IndexView);
