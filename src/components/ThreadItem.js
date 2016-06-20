@@ -23,7 +23,7 @@ export default class ThreadItem extends Component {
     if (fmtTime.date() !== moment().date()) {
       fmtTime = fmtTime.format('D. MMM');
     } else {
-      fmtTime = fmtTime.format('HH:MM');
+      fmtTime = fmtTime.format('HH:mm');
     }
 
     return (

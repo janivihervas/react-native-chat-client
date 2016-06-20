@@ -14,7 +14,7 @@ describe('IndexViewContainer', () => {
   beforeEach(() => {
     const renderer = TestUtils.createRenderer();
     store = configureStore();
-    renderer.render(<IndexViewContainer store={store} currentUser={Map({id: '0'})}/>);
+    renderer.render(<IndexViewContainer store={store} currentUser={Map({id: '0', name: 'name'})}/>);
     el = renderer.getRenderOutput();
   });
 

@@ -21,7 +21,7 @@ const limitUsers = 10;
 
 let users = {
   '0': {
-    name: 'Current user',
+    name: 'Current User',
     threads: []
   }
 };
@@ -88,14 +88,14 @@ for (let i = 0; i < threadIds.length; i++) {
   for (let j = 0; j < count; j++) {
     const participants = threads.getIn([threadIds[i], 'participants']).toArray();
     const id = '' + messageId++;
-    let then = new Date();
-    then = +then - 3 * 86400000;
+    let then = Date.now();
+    then -= 3 * 24 * 60 * 60 * 1000;
     then = new Date(then);
 
     messages[id] = {
       author: participants[exclusiveRandomInt(participants.length - 1)],
       text: lorem,
-      time: +randomDate(then, new Date())
+      time: randomDate(then, new Date()).getTime()
     };
     /* eslint-disable */
     threads = threads.updateIn(
@@ -120,26 +120,23 @@ export function fetchThreads(user) {
       .filter(d => d.get('participants').includes(user))
       .map((thread, id) => {
         const participants = thread.get('participants')
-          .filter(participant => user !== participant)
           .map(participant => state.users.getIn([participant, 'name']))
           .toArray();
 
-        const lastMessage = thread.get('messages')
+        const _messages = thread.get('messages')
           .map(message => state.messages.get(message))
-          .sort((a, b) => a.get('time') < b.get('time'))
-          .take(1)
           .map(message => message.set('author', state.users.getIn([message.get('author'), 'name'])))
-          .map(message => ({
-            author: message.get('author'),
-            time: message.get('time'),
-            text: message.get('text')
-          }))
-          .first();
+          .sort((a, b) => {
+            if (a.get('time') > b.get('time')) {
+              return 1;
+            }
+            return -1;
+          });
 
         return fromJS({
           id,
           participants,
-          lastMessage
+          messages: _messages
         });
       })
       .sort((a, b) => a.getIn(['lastMessage', 'time']) < b.getIn(['lastMessage', 'time']))

@@ -11,7 +11,7 @@ import IndexViewHeader from '../../../src/components/IndexViewHeader';
 import ThreadList from '../../../src/components/ThreadList';
 
 describe('IndexView', () => {
-  it('should render IndexViewContainer and ThreadList', () => {
+  it('should render IndexViewHeader and ThreadList', () => {
     const fn = () => {};
 
     const renderer = TestUtils.createRenderer();
