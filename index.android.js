@@ -20,7 +20,7 @@ class ReactNativeChatClient extends React.Component {
   }
 
   navigateBack() {
-    const currentView = store.getState().appState.get('currentView');
+    const currentView = store.getState().getIn(['app', 'currentView', 'view']);
 
     if (currentView === NAVIGATION.INDEX_VIEW) {
       return false;

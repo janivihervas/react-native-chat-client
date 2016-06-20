@@ -14,6 +14,7 @@ export default class IndexView extends Component {
   }
 
   render() {
+    // TODO: show spinner instead of list if fetching, remove from header
     return (
       <View style={common.fullSize}>
         <IndexViewHeader

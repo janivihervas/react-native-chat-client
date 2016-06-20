@@ -1,7 +1,23 @@
 import {List, fromJS} from 'immutable';
 import Promise from 'bluebird';
 
-const limit = 5;
+function randomDate(start, end) {
+  return new Date(random(start.getTime(), end.getTime()));
+}
+
+function exclusiveRandomInt(high, ...exclusives) {
+  const result = Math.round(Math.random() * high);
+  if (exclusives.indexOf(result) !== -1) {
+    return exclusiveRandomInt(high, ...exclusives);
+  }
+  return result;
+}
+
+function random(start, end) {
+  return Math.round(start + Math.random() * (end - start));
+}
+
+const limitUsers = 10;
 
 let users = {
   '0': {
@@ -10,7 +26,7 @@ let users = {
   }
 };
 
-for (let i = 1; i < limit; i++) {
+for (let i = 1; i < limitUsers; i++) {
   users['' + i] = {name: `Name${i}`, threads: []};
 }
 
@@ -19,62 +35,56 @@ const userIds = Object.keys(users);
 users = fromJS(users);
 
 let threads = {};
-function exclusiveRandomInt(high, ...exclusives) {
-  const result = Math.round(Math.random() * high);
-  if (exclusives.indexOf(result) !== -1) {
-    return exclusiveRandomInt(high, ...exclusives);
-  }
-  return result;
-}
 let threadId = 0;
-for (let i = 0; i < limit; i++) {
-  const id0 = '' + threadId++;
-  const id1 = '' + threadId++;
 
-  const userPrivate = exclusiveRandomInt(limit - 1, i);
-  threads[id0] = {
-    participants: [userIds[i], userIds[userPrivate]],
-    messages: []
-  };
-  const userGroup0 = exclusiveRandomInt(limit - 1, i);
-  const userGroup1 = exclusiveRandomInt(limit - 1, i, userGroup0);
-  threads[id1] = {
-    participants: [userIds[i], userIds[userGroup0], userIds[userGroup1]],
-    messages: []
-  };
+const limitThreads = limitUsers;
 
-  users = users.updateIn(
-    [userIds[i], 'threads'],
-    () => List([id0, id1])
-  );
-  users = users.updateIn(
-    [userIds[userPrivate], 'threads'],
-    () => List([id0])
-  );
-  users = users.updateIn(
-    [userIds[userGroup0], 'threads'],
-    list => list.push(id1)
-  );
-  users = users.updateIn(
-    [userIds[userGroup1], 'threads'],
-    list => list.push(id1)
-  );
+for (let j = 0; j < 3; j++) {
+  for (let i = 0; i < limitThreads; i++) {
+    const id0 = '' + threadId++;
+    const id1 = '' + threadId++;
+
+    const userPrivate = exclusiveRandomInt(limitUsers - 1, i, 0);
+    threads[id0] = {
+      participants: [userIds[i], userIds[userPrivate]],
+      messages: []
+    };
+    const userGroup0 = exclusiveRandomInt(limitUsers - 1, i, 0);
+    const userGroup1 = exclusiveRandomInt(limitUsers - 1, i, userGroup0, 0);
+    threads[id1] = {
+      participants: [userIds[i], userIds[userGroup0], userIds[userGroup1]],
+      messages: []
+    };
+
+    users = users.updateIn(
+      [userIds[i], 'threads'],
+      () => List([id0, id1])
+    );
+    users = users.updateIn(
+      [userIds[userPrivate], 'threads'],
+      () => List([id0])
+    );
+    users = users.updateIn(
+      [userIds[userGroup0], 'threads'],
+      list => list.push(id1)
+    );
+    users = users.updateIn(
+      [userIds[userGroup1], 'threads'],
+      list => list.push(id1)
+    );
+  }
 }
 
 const threadIds = Object.keys(threads);
 
 threads = fromJS(threads);
 
-function randomDate(start, end) {
-  return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-}
-
 const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin varius sed elit quis auctor.';
 let messages = {};
 let messageId = 0;
 
 for (let i = 0; i < threadIds.length; i++) {
-  const count = exclusiveRandomInt(10, 0, 1, 2);
+  const count = random(5, 15);
   for (let j = 0; j < count; j++) {
     const participants = threads.getIn([threadIds[i], 'participants']).toArray();
     const id = '' + messageId++;
@@ -126,12 +136,13 @@ export function fetchThreads(user) {
           }))
           .first();
 
-        return {
+        return fromJS({
           id,
           participants,
           lastMessage
-        };
+        });
       })
+      .sort((a, b) => a.getIn(['lastMessage', 'time']) < b.getIn(['lastMessage', 'time']))
       .toList()
       .toJS();
 

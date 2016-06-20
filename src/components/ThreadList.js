@@ -30,7 +30,9 @@ export default class ThreadList extends Component {
     return (
       <ThreadItem
         id={rowData.get('id')}
-        lastMessage={rowData.get('lastMessage')}
+        text={rowData.getIn(['lastMessage', 'text'])}
+        time={rowData.getIn(['lastMessage', 'time'])}
+        author={rowData.getIn(['lastMessage', 'author'])}
         participants={rowData.get('participants')}
         navigateToThreadView={this.props.navigateToThreadView}
       />
@@ -46,9 +48,10 @@ export default class ThreadList extends Component {
         </View>
       );
     }
+    // TODO: renderSeparator()
     return (
       <ListView
-        style={[common.fullSize, common.padding]}
+        style={[common.fullSize, common.padding, {paddingTop: 10, paddingBottom: 10}]}
         dataSource={this.state.dataSource}
         renderRow={this.renderRow}
       />

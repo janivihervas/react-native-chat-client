@@ -4,7 +4,7 @@ import App from './App';
 
 export default connect(
   state => ({
-    currentView: state.app.get('currentView'),
-    currentUser: state.app.get('currentUser')
+    currentView: state.getIn(['app', 'currentView']),
+    currentUser: state.getIn(['app', 'currentUser'])
   })
 )(App);

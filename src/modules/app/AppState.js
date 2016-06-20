@@ -1,13 +1,16 @@
-import {Map} from 'immutable';
+import {fromJS, Map} from 'immutable';
 
 const ACTION_TYPES = {
   NAVIGATION: 'NAVIGATION'
 };
 
-export function navigate(target) {
+export function navigate(view, id) {
   return {
     type: ACTION_TYPES.NAVIGATION,
-    payload: target
+    payload: Map({
+      view,
+      id
+    })
   };
 }
 
@@ -16,12 +19,14 @@ export const NAVIGATION = {
   THREAD_VIEW: 'THREAD_VIEW'
 };
 
-const initialState = Map({
-  currentView: NAVIGATION.INDEX_VIEW,
-  currentUser: Map({
+const initialState = fromJS({
+  currentView: {
+    view: NAVIGATION.INDEX_VIEW
+  },
+  currentUser: {
     id: '0',
     name: 'Current User'
-  })
+  }
 });
 
 export default function AppStateReducer(state = initialState, action = {}) {

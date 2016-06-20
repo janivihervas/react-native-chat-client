@@ -5,7 +5,7 @@ import {navigate, NAVIGATION} from '../app/AppState';
 
 export default connect(
   state => ({
-    currentView: state.appState.get('currentView')
+    currentView: state.getIn(['app', 'currentView'])
   }),
   dispatch => ({
     navigateToIndexView: () => {

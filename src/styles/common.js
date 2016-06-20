@@ -11,7 +11,9 @@ const styles = StyleSheet.create({
 });
 
 export const colors = {
-  blue: '#42BADC'
+  blue: '#42BADC',
+  grey: '#DFDFDF',
+  black: '#000000'
 };
 
 export default styles;

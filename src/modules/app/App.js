@@ -8,7 +8,7 @@ import ThreadViewContainer from '../threadView/ThreadViewContainer';
 
 export default class App extends Component {
   render() {
-    switch (this.props.currentView) {
+    switch (this.props.currentView.get('view')) {
       case NAVIGATION.INDEX_VIEW: {
         return <IndexViewContainer currentUser={this.props.currentUser}/>;
       }
@@ -25,7 +25,7 @@ export default class App extends Component {
 }
 
 App.propTypes = {
-  currentView: PropTypes.string.isRequired,
+  currentView: PropTypes.instanceOf(Map).isRequired,
   currentUser: PropTypes.instanceOf(Map).isRequired
 };
 
