@@ -1,7 +1,7 @@
 import {fromJS} from 'immutable';
 import {loop, Effects} from 'redux-loop';
 
-import * as mockServer from '../../redux/mockServer';
+import * as mockServer from './mockServer';
 
 const ACTION_TYPES = {
   FETCH_THREADS: 'FETCH_THREADS',
@@ -35,7 +35,7 @@ const initialState = fromJS({
   fetchingError: ''
 });
 
-export default function IndexViewStateReducer(state = initialState, action = {}) {
+export default function ThreadsStateReducer(state = initialState, action = {}) {
   switch (action.type) {
     case ACTION_TYPES.FETCH_THREADS: {
       return loop(

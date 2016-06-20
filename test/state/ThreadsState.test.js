@@ -4,28 +4,28 @@ import {loop, Effects} from 'redux-loop';
 import {Map, fromJS} from 'immutable';
 import rewire from 'rewire';
 
-import IndexViewStateReducer, {
+import ThreadsStateReducer, {
   fetchThreads,
   fetchThreadsFromAPI
-} from '../../../src/modules/indexView/IndexViewState';
+} from '../../src/state/ThreadsState';
 
-const mockIndexViewState = rewire('../../../src/modules/indexView/IndexViewState');
+const mockThreadsStateReducer = rewire('../../src/state/ThreadsState');
 
-describe('IndexViewState', () => {
+describe('ThreadsState', () => {
   let initialState;
 
   beforeEach(() => {
-    initialState = IndexViewStateReducer();
+    initialState = ThreadsStateReducer();
   });
 
-  it('AppStateReducer', () => {
-    assert.isOk(initialState.toJS());
+  it('ThreadsStateReducer', () => {
+    assert.isOk(initialState);
     assert.equal(initialState.get('threadsFetched'), false);
     assert.equal(initialState.get('fetching'), false);
     assert.isArray(initialState.get('threads').toJS());
 
-    assert.equal(initialState, IndexViewStateReducer());
-    assert.equal(IndexViewStateReducer(1, {type: 'weiufbef'}), 1);
+    assert.equal(initialState, ThreadsStateReducer());
+    assert.equal(ThreadsStateReducer(1, {type: 'weiufbef'}), 1);
   });
 
   it('fetchThreads', () => {
@@ -41,7 +41,7 @@ describe('IndexViewState', () => {
     const action = fetchThreads('test');
     const state = Map();
     assert.deepEqual(
-      IndexViewStateReducer(state, action),
+      ThreadsStateReducer(state, action),
       loop(
         state.set('fetching', true),
         Effects.promise(fetchThreadsFromAPI, action.payload)
@@ -56,7 +56,7 @@ describe('IndexViewState', () => {
     };
     const state = Map();
     assert.deepEqual(
-      IndexViewStateReducer(state, action),
+      ThreadsStateReducer(state, action),
       state
         .set('fetching', false)
         .set('threadsFetched', true)
@@ -71,7 +71,7 @@ describe('IndexViewState', () => {
     };
     const state = Map();
     assert.deepEqual(
-      IndexViewStateReducer(state, action),
+      ThreadsStateReducer(state, action),
       state
         .set('fetching', false)
         .set('fetchingError', fromJS(action.payload))
@@ -79,12 +79,12 @@ describe('IndexViewState', () => {
   });
 
   it('fetchThreadsFromAPI success', () => {
-    return mockIndexViewState.__with__('mockServer', {
+    return mockThreadsStateReducer.__with__('mockServer', {
       fetchThreads(user) {
         return Promise.resolve(user);
       }
     })(() =>
-      mockIndexViewState.fetchThreadsFromAPI('test')
+      mockThreadsStateReducer.fetchThreadsFromAPI('test')
         .then(action => assert.deepEqual(action, {
           type: 'FETCHING_DONE',
           payload: 'test'
@@ -93,12 +93,12 @@ describe('IndexViewState', () => {
   });
 
   it('fetchThreadsFromAPI failure', () => {
-    return mockIndexViewState.__with__('mockServer', {
+    return mockThreadsStateReducer.__with__('mockServer', {
       fetchThreads() {
         return Promise.reject('error');
       }
     })(() =>
-      mockIndexViewState.fetchThreadsFromAPI()
+      mockThreadsStateReducer.fetchThreadsFromAPI()
         .then(action => assert.deepEqual(action, {
           type: 'FETCHING_ERROR',
           payload: 'error'

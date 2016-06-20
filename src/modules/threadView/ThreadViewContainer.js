@@ -1,17 +1,25 @@
 import {connect} from 'react-redux';
 
 import ThreadView from './ThreadView';
-import {navigate, NAVIGATION} from '../app/AppState';
+import {navigate, VIEWS} from '../../state/NavigationState';
 
 export default connect(
-  state => ({
-    id: state.getIn(['thread', 'id']),
-    participants: state.getIn(['thread', 'participants']),
-    messages: state.getIn(['thread', 'messages'])
-  }),
+  state => {
+    const id = state.getIn(['navigationState', 'threadID']);
+    const thread = state
+      .getIn(['threads', 'threads'])
+      .filter(d => d.get('id') === id)
+      .first();
+
+    return {
+      id,
+      participants: thread.get('participants'),
+      messages: thread.get('messages')
+    };
+  },
   dispatch => ({
     navigateToIndexView: () => {
-      dispatch(navigate(NAVIGATION.INDEX_VIEW));
+      dispatch(navigate(VIEWS.INDEX_VIEW));
     }
   })
 )(ThreadView);

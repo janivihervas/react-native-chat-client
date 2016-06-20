@@ -3,9 +3,9 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import {AppRegistry, BackAndroid} from 'react-native';
 
-import configureStore from './src/redux/configureStore';
+import configureStore from './src/store/configureStore';
 import AppContainer from './src/modules/app/AppContainer';
-import {navigate, NAVIGATION} from './src/modules/app/AppState';
+import {navigate, VIEWS} from './src/state/NavigationState';
 
 const store = configureStore();
 
@@ -20,13 +20,13 @@ class ReactNativeChatClient extends React.Component {
   }
 
   navigateBack() {
-    const currentView = store.getState().getIn(['app', 'currentView', 'view']);
+    const currentView = store.getState().getIn(['navigationState', 'currentView']);
 
-    if (currentView === NAVIGATION.INDEX_VIEW) {
+    if (currentView === VIEWS.INDEX_VIEW) {
       return false;
     }
 
-    store.dispatch(navigate(NAVIGATION.INDEX_VIEW));
+    store.dispatch(navigate(VIEWS.INDEX_VIEW));
     return true;
   }
 

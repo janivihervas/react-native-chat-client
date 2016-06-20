@@ -7,7 +7,7 @@ import {Map} from 'immutable';
 import App from '../../../src/modules/app/App';
 import IndexViewContainer from '../../../src/modules/indexView/IndexViewContainer';
 import ThreadViewContainer from '../../../src/modules/threadView/ThreadViewContainer';
-import {NAVIGATION} from '../../../src/modules/app/AppState';
+import {VIEWS} from '../../../src/state/NavigationState';
 
 describe('App', () => {
   let renderer;
@@ -25,7 +25,7 @@ describe('App', () => {
   it('should render IndexViewContainer', () => {
     renderer.render((
       <App
-        currentView={Map({view: NAVIGATION.INDEX_VIEW})}
+        currentView={VIEWS.INDEX_VIEW}
         navigateToIndexView={fn}
         navigateToThreadView={fn}
         currentUser={user}
@@ -39,7 +39,7 @@ describe('App', () => {
   it('should render ThreadViewContainer', () => {
     renderer.render((
       <App
-        currentView={Map({view: NAVIGATION.THREAD_VIEW})}
+        currentView={VIEWS.THREAD_VIEW}
         navigateToIndexView={fn}
         navigateToThreadView={fn}
         currentUser={user}
@@ -53,7 +53,7 @@ describe('App', () => {
   it('should render error message if given wrong currentView prop', () => {
     renderer.render((
       <App
-        currentView={Map({view: 'not found'})}
+        currentView={'not found'}
         navigateToIndexView={fn}
         navigateToThreadView={fn}
         currentUser={user}

@@ -2,17 +2,17 @@ import React, {Component, PropTypes} from 'react';
 import {Text} from 'react-native';
 import {Map} from 'immutable';
 
-import {NAVIGATION} from './AppState';
+import {VIEWS} from '../../state/NavigationState';
 import IndexViewContainer from '../indexView/IndexViewContainer';
 import ThreadViewContainer from '../threadView/ThreadViewContainer';
 
 export default class App extends Component {
   render() {
-    switch (this.props.currentView.get('view')) {
-      case NAVIGATION.INDEX_VIEW: {
+    switch (this.props.currentView) {
+      case VIEWS.INDEX_VIEW: {
         return <IndexViewContainer currentUser={this.props.currentUser}/>;
       }
-      case NAVIGATION.THREAD_VIEW: {
+      case VIEWS.THREAD_VIEW: {
         return <ThreadViewContainer />;
       }
       default: {
@@ -25,8 +25,9 @@ export default class App extends Component {
 }
 
 App.propTypes = {
-  currentView: PropTypes.instanceOf(Map).isRequired,
+  currentView: PropTypes.string.isRequired,
+  threadID: PropTypes.string,
   currentUser: PropTypes.instanceOf(Map).isRequired
 };
 
-App.displayName = 'Name';
+App.displayName = 'App';

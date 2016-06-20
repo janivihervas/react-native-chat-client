@@ -1,7 +1,7 @@
 import {createStore, applyMiddleware, compose} from 'redux';
 import {install} from 'redux-loop';
 
-import reducer from './reducer';
+import reducer from '../state/reducer';
 import middleware from './middleware';
 
 export default function configureStore(initialState) {

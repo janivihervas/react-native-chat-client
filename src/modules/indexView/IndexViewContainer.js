@@ -1,12 +1,12 @@
 import {connect} from 'react-redux';
 
 import IndexView from './IndexView';
-import {navigate, NAVIGATION} from '../app/AppState';
-import {fetchThreads} from './IndexViewState';
+import {navigate, VIEWS} from '../../state/NavigationState';
+import {fetchThreads} from '../../state/ThreadsState';
 
 export default connect(
   (state, ownProps) => {
-    const threads = state.getIn(['index','threads'])
+    const threads = state.getIn(['threads','threads'])
       .map(thread => thread
         .set('lastMessage', thread.get('messages').last())
         .update('participants', participants =>
@@ -24,13 +24,13 @@ export default connect(
 
     return {
       threads,
-      threadsFetched: state.getIn(['index', 'threadsFetched']),
-      fetching: state.getIn(['index', 'fetching'])
+      threadsFetched: state.getIn(['threads', 'threadsFetched']),
+      fetching: state.getIn(['threads', 'fetching'])
     };
   },
   (dispatch, ownProps) => ({
     navigateToThreadView: (id) => {
-      dispatch(navigate(NAVIGATION.THREAD_VIEW, id));
+      dispatch(navigate(VIEWS.THREAD_VIEW, id));
     },
     fetchThreads: () => {
       dispatch(fetchThreads(ownProps.currentUser.get('id')));

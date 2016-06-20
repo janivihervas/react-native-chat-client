@@ -5,7 +5,7 @@ import {assert} from 'chai';
 import {Map, List} from 'immutable';
 
 import IndexViewContainer from '../../../src/modules/indexView/IndexViewContainer';
-import configureStore from '../../../src/redux/configureStore';
+import configureStore from '../../../src/store/configureStore';
 
 describe('IndexViewContainer', () => {
   let el;
@@ -170,15 +170,15 @@ describe('IndexViewContainer', () => {
     el.props.navigateToThreadView();
     const state = store.getState();
 
-    assert.equal(state.getIn(['app', 'currentView', 'view']), 'THREAD_VIEW');
+    assert.equal(state.getIn(['navigationState', 'currentView']), 'THREAD_VIEW');
   });
 
   it('fetchThreads', () => {
-    assert.equal(store.getState().getIn(['index', 'fetching']), false);
+    assert.equal(store.getState().getIn(['threads', 'fetching']), false);
 
     el.props.fetchThreads();
 
-    assert.equal(store.getState().getIn(['index', 'fetching']), true);
+    assert.equal(store.getState().getIn(['threads', 'fetching']), true);
   });
 
 });
