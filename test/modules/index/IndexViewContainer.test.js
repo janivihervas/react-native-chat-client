@@ -27,6 +27,145 @@ describe('IndexViewContainer', () => {
     assert.isFunction(el.props.navigateToThreadView);
   });
 
+  it('threads should be sorted and have lastMessage field inserted', () => {
+    const threads = [
+      {
+        id: '0',
+        participants: ['0', '1'],
+        messages: [
+          {
+            author: 'Test0',
+            time: 1,
+            text: 'Test0'
+          },
+          {
+            author: 'Test1',
+            time: 2,
+            text: 'Test1'
+          },
+          {
+            author: 'Test1',
+            time: 3,
+            text: 'Test2'
+          }
+        ]
+      },
+      {
+        id: '1',
+        participants: ['0', '2'],
+        messages: [
+          {
+            author: 'Test0',
+            time: 4,
+            text: 'Test3'
+          },
+          {
+            author: 'Test2',
+            time: 5,
+            text: 'Test4'
+          },
+          {
+            author: 'Test0',
+            time: 6,
+            text: 'Test5'
+          }
+        ]
+      },
+      {
+        id: '3',
+        participants: ['0', '4'],
+        messages: [
+          {
+            author: 'Test0',
+            time: 1,
+            text: 'Test0'
+          }
+        ]
+      }
+    ];
+    store.dispatch({
+      type: 'FETCHING_DONE',
+      payload: threads
+    });
+    const renderer = TestUtils.createRenderer();
+    renderer.render(<IndexViewContainer store={store} currentUser={Map({id: '0', name: '0'})}/>);
+    el = renderer.getRenderOutput();
+
+    assert.deepEqual(
+      el.props.threads.toJS(),
+      [
+        {
+          id: '1',
+          participants: ['2'],
+          lastMessage: {
+            author: 'Test0',
+            time: 6,
+            text: 'Test5'
+          },
+          messages: [
+            {
+              author: 'Test0',
+              time: 4,
+              text: 'Test3'
+            },
+            {
+              author: 'Test2',
+              time: 5,
+              text: 'Test4'
+            },
+            {
+              author: 'Test0',
+              time: 6,
+              text: 'Test5'
+            }
+          ]
+        },
+        {
+          id: '0',
+          participants: ['1'],
+          lastMessage: {
+            author: 'Test1',
+            time: 3,
+            text: 'Test2'
+          },
+          messages: [
+            {
+              author: 'Test0',
+              time: 1,
+              text: 'Test0'
+            },
+            {
+              author: 'Test1',
+              time: 2,
+              text: 'Test1'
+            },
+            {
+              author: 'Test1',
+              time: 3,
+              text: 'Test2'
+            }
+          ]
+        },
+        {
+          id: '3',
+          participants: ['4'],
+          lastMessage: {
+            author: 'Test0',
+            time: 1,
+            text: 'Test0'
+          },
+          messages: [
+            {
+              author: 'Test0',
+              time: 1,
+              text: 'Test0'
+            }
+          ]
+        }
+      ]
+    );
+  });
+
   it('navigateToThreadView', () => {
     el.props.navigateToThreadView();
     const state = store.getState();

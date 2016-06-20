@@ -7,6 +7,7 @@ instrumentation:
   excludes:
     - node_modules
     - src/redux/logger.js
+    - src/redux/mockServer.js
   include-all-sources: true
   es-modules: true
 reporting:
