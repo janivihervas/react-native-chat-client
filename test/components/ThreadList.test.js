@@ -47,7 +47,7 @@ describe('ThreadList', () => {
 
   it('renderRow', () => {
     const threads = fromJS([
-      {id: '1', lastMessage: {author: 'test', text: 'blaa'}, participants: ['0', '1']}
+      {id: '1', lastMessage: {author: 'test', text: 'blaa', time: 0}, participants: ['0', '1']}
     ]);
     renderer.render((
       <ThreadList threads={threads} navigateToThreadView={fn}/>
@@ -59,7 +59,9 @@ describe('ThreadList', () => {
     assert.deepEqual(instance.renderRow(threads.get(0)), (
       <ThreadItem
         id={threads.get(0).get('id')}
-        lastMessage={threads.get(0).get('lastMessage')}
+        text={threads.get(0).getIn(['lastMessage', 'text'])}
+        time={threads.get(0).getIn(['lastMessage', 'time'])}
+        author={threads.get(0).getIn(['lastMessage', 'author'])}
         participants={threads.get(0).get('participants')}
         navigateToThreadView={fn}
       />

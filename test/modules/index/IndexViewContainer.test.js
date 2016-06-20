@@ -31,15 +31,15 @@ describe('IndexViewContainer', () => {
     el.props.navigateToThreadView();
     const state = store.getState();
 
-    assert.equal(state.app.get('currentView'), 'THREAD_VIEW');
+    assert.equal(state.getIn(['app', 'currentView', 'view']), 'THREAD_VIEW');
   });
 
   it('fetchThreads', () => {
-    assert.equal(store.getState().index.get('fetching'), false);
+    assert.equal(store.getState().getIn(['index', 'fetching']), false);
 
     el.props.fetchThreads();
 
-    assert.equal(store.getState().index.get('fetching'), true);
+    assert.equal(store.getState().getIn(['index', 'fetching']), true);
   });
 
 });

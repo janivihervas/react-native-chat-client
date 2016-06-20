@@ -18,7 +18,8 @@ describe('AppContainer', () => {
   });
 
   it('should pass props', () => {
-    assert.isString(el.props.currentView);
+    assert.isOk(el.props.currentView);
+    assert.isString(el.props.currentView.get('view'));
   });
 
   // TODO: move this to ThreadViewContainer

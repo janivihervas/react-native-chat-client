@@ -25,7 +25,7 @@ describe('App', () => {
   it('should render IndexViewContainer', () => {
     renderer.render((
       <App
-        currentView={NAVIGATION.INDEX_VIEW}
+        currentView={Map({view: NAVIGATION.INDEX_VIEW})}
         navigateToIndexView={fn}
         navigateToThreadView={fn}
         currentUser={user}
@@ -39,7 +39,7 @@ describe('App', () => {
   it('should render ThreadViewContainer', () => {
     renderer.render((
       <App
-        currentView={NAVIGATION.THREAD_VIEW}
+        currentView={Map({view: NAVIGATION.THREAD_VIEW})}
         navigateToIndexView={fn}
         navigateToThreadView={fn}
         currentUser={user}
@@ -53,7 +53,7 @@ describe('App', () => {
   it('should render error message if given wrong currentView prop', () => {
     renderer.render((
       <App
-        currentView={'not found'}
+        currentView={Map({view: 'not found'})}
         navigateToIndexView={fn}
         navigateToThreadView={fn}
         currentUser={user}

@@ -6,6 +6,7 @@ instrumentation:
   default-excludes: true
   excludes:
     - node_modules
+    - src/redux/logger.js
   include-all-sources: true
   es-modules: true
 reporting:
