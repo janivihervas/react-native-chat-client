@@ -5,6 +5,7 @@ import {navigate, VIEWS} from '../../state/NavigationState';
 
 export default connect(
   state => {
+    const currentUser = state.getIn(['app', 'currentUser', 'name']);
     const id = state.getIn(['navigationState', 'threadID']);
     const thread = state
       .getIn(['threads', 'threads'])
@@ -12,8 +13,11 @@ export default connect(
       .first();
 
     return {
-      id,
-      participants: thread.get('participants'),
+      currentUser,
+      participants: thread.get('participants')
+        .filter(user =>
+          user !== currentUser
+        ),
       messages: thread.get('messages')
     };
   },
