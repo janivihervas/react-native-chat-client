@@ -8,7 +8,6 @@ export default connect(
   (state, ownProps) => {
     const threads = state.getIn(['threads','threads'])
       .map(thread => thread
-        .set('lastMessage', thread.get('messages').last())
         .update('participants', participants =>
           participants.filter(user =>
             user !== ownProps.currentUser.get('name')

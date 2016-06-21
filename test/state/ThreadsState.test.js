@@ -52,7 +52,20 @@ describe('ThreadsState', () => {
   it('FETCHING_DONE', () => {
     const action = {
       type: 'FETCHING_DONE',
-      payload: ['test', 'asdasd']
+      payload: [
+        {
+          id: '0',
+          messages: [
+            'test'
+          ]
+        },
+        {
+          id: '1',
+          messages: [
+            'asdad'
+          ]
+        }
+      ]
     };
     const state = Map();
     assert.deepEqual(
@@ -61,6 +74,11 @@ describe('ThreadsState', () => {
         .set('fetching', false)
         .set('threadsFetched', true)
         .set('threads', fromJS(action.payload))
+        .update('threads', threads =>
+          threads.map(thread =>
+            thread.set('lastMessage', thread.get('messages').last())
+          )
+        )
     );
   });
 

@@ -18,7 +18,8 @@ export default connect(
         .filter(user =>
           user !== currentUser
         ),
-      messages: thread.get('messages')
+      messages: thread.get('messages'),
+      lastMessageTime: thread.getIn(['lastMessage', 'time'])
     };
   },
   dispatch => ({

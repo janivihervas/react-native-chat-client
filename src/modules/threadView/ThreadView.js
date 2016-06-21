@@ -13,6 +13,7 @@ export default class ThreadView extends Component {
         <ThreadViewHeader
           navigateToIndexView={this.props.navigateToIndexView}
           participants={this.props.participants}
+          lastMessageTime={this.props.lastMessageTime}
         />
         <MessageList
           currentUser={this.props.currentUser}
@@ -27,7 +28,8 @@ ThreadView.propTypes = {
   navigateToIndexView: PropTypes.func.isRequired,
   participants: PropTypes.instanceOf(List).isRequired,
   currentUser: PropTypes.string.isRequired,
-  messages: PropTypes.instanceOf(List).isRequired
+  messages: PropTypes.instanceOf(List).isRequired,
+  lastMessageTime: PropTypes.number.isRequired
 };
 
 ThreadView.displayName = 'ThreadView';

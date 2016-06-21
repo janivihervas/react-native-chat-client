@@ -2,7 +2,7 @@ import React from 'react';
 import {View} from 'react-native';
 import TestUtils from 'react-addons-test-utils';
 import {describe, it} from 'mocha';
-import {List, Map} from 'immutable';
+import {List} from 'immutable';
 
 import {assertReactElements} from '../../helpers';
 import ThreadView from '../../../src/modules/threadView/ThreadView';
@@ -13,15 +13,16 @@ describe('ThreadView', () => {
   it('should render ThreadViewHeader and MessageList', () => {
     const fn = () => {};
     const list = List([]);
-    const map = Map({});
+    const user = 'name';
 
     const renderer = TestUtils.createRenderer();
     renderer.render((
       <ThreadView
         navigateToIndexView={fn}
         participants={list}
-        currentUser={map}
+        currentUser={user}
         messages={list}
+        lastMessageTime={1}
       />
     ));
     const el = renderer.getRenderOutput();
@@ -31,9 +32,10 @@ describe('ThreadView', () => {
         <ThreadViewHeader
           navigateToIndexView={fn}
           participants={list}
+          lastMessageTime={1}
         />
         <MessageList
-          currentUser={map}
+          currentUser={user}
           messages={list}
         />
       </View>

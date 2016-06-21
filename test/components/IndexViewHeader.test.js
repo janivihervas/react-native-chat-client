@@ -2,10 +2,11 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import TestUtils from 'react-addons-test-utils';
 import {describe, it, beforeEach} from 'mocha';
+import Spinner from 'react-native-gifted-spinner';
 
 import {assertReactElements} from '../helpers';
 import IndexViewHeader from '../../src/components/IndexViewHeader';
-import Spinner from '../../src/components/Spinner';
+import {colors} from '../../src/styles/common';
 
 describe('IndexViewHeader', () => {
   let renderer;
@@ -26,7 +27,7 @@ describe('IndexViewHeader', () => {
           <Text/>
         </View>
         <View>
-          <Spinner/>
+          <Spinner color={colors.white}/>
         </View>
       </View>
     ));

@@ -51,7 +51,7 @@ export default class ThreadList extends Component {
     // TODO: renderSeparator()
     return (
       <ListView
-        style={[common.fullSize, common.padding, {paddingTop: 10, paddingBottom: 10}]}
+        style={[common.fullSize, common.paddingHorizontal, common.paddingVertical]}
         dataSource={this.state.dataSource}
         renderRow={this.renderRow}
       />

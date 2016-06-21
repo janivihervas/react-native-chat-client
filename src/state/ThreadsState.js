@@ -47,7 +47,12 @@ export default function ThreadsStateReducer(state = initialState, action = {}) {
       return state
         .set('fetching', false)
         .set('threadsFetched', true)
-        .set('threads', fromJS(action.payload));
+        .set('threads', fromJS(action.payload))
+        .update('threads', threads =>
+          threads.map(thread =>
+            thread.set('lastMessage', thread.get('messages').last())
+          )
+        );
     }
     case ACTION_TYPES.FETCHING_ERROR: {
       return state
