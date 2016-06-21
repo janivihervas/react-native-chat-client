@@ -54,6 +54,8 @@ ThreadItem.propTypes = {
   navigateToThreadView: PropTypes.func.isRequired
 };
 
+ThreadItem.displayName = 'ThreadItem';
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',

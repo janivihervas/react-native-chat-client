@@ -13,3 +13,5 @@ export default class Avatar extends Component {
 Avatar.propTypes = {
   many: PropTypes.bool.isRequired
 };
+
+Avatar.displayName = 'Avatar';
