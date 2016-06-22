@@ -49,9 +49,9 @@ describe('ThreadsState', () => {
     );
   });
 
-  it('FETCHING_DONE', () => {
+  it('THREADS_UPDATED', () => {
     const action = {
-      type: 'FETCHING_DONE',
+      type: 'THREADS_UPDATED',
       payload: [
         {
           id: '0',
@@ -104,7 +104,7 @@ describe('ThreadsState', () => {
     })(() =>
       mockThreadsStateReducer.fetchThreadsFromAPI('test')
         .then(action => assert.deepEqual(action, {
-          type: 'FETCHING_DONE',
+          type: 'THREADS_UPDATED',
           payload: 'test'
         }))
     );

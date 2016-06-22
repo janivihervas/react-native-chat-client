@@ -2,14 +2,14 @@ import {connect} from 'react-redux';
 
 import ThreadView from './ThreadView';
 import {navigate, VIEWS} from '../../state/NavigationState';
+import {newMessage} from '../../state/ThreadsState';
 
 export default connect(
-  state => {
-    const currentUser = state.getIn(['app', 'currentUser', 'name']);
-    const id = state.getIn(['navigationState', 'threadID']);
+  (state, ownProps) => {
+    const currentUser = ownProps.currentUser.get('name');
     const thread = state
       .getIn(['threads', 'threads'])
-      .filter(d => d.get('id') === id)
+      .filter(d => d.get('id') === ownProps.threadID)
       .first();
 
     return {
@@ -22,12 +22,12 @@ export default connect(
       lastMessageTime: thread.getIn(['lastMessage', 'time'])
     };
   },
-  dispatch => ({
+  (dispatch, ownProps) => ({
     navigateToIndexView: () => {
       dispatch(navigate(VIEWS.INDEX_VIEW));
     },
     submit: message => {
-      console.log('message received: ' + message);
+      dispatch(newMessage(ownProps.threadID, ownProps.currentUser.get('name'), message));
     }
   })
 )(ThreadView);

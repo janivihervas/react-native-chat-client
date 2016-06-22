@@ -13,7 +13,7 @@ export default class App extends Component {
         return <IndexViewContainer currentUser={this.props.currentUser}/>;
       }
       case VIEWS.THREAD_VIEW: {
-        return <ThreadViewContainer />;
+        return <ThreadViewContainer currentUser={this.props.currentUser} threadID={this.props.threadID}/>;
       }
       default: {
         return (

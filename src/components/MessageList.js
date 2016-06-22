@@ -9,6 +9,7 @@ export default class MessageList extends Component {
   constructor(props) {
     super();
     this.renderRow = this.renderRow.bind(this);
+    this.scrollToBottom = this.scrollToBottom.bind(this);
 
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => !Immutable.is(r1, r2)
@@ -20,9 +21,28 @@ export default class MessageList extends Component {
     };
   }
 
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+
   componentWillReceiveProps(nextProps) {
     this.setState({
       dataSource: this.state.ds.cloneWithRows(nextProps.messages.toArray())
+    });
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom() {
+    const {listView} = this.refs;
+    listView.requestAnimationFrame(() => {
+      // keep this animated, because it seems to be hard to render
+      // the initial view to be scrolled to bottom
+      listView.scrollTo({
+        y: listView.scrollProperties.contentLength
+      });
     });
   }
 
@@ -53,6 +73,7 @@ export default class MessageList extends Component {
   render() {
     return (
       <ListView
+        ref='listView'
         style={common.list}
         dataSource={this.state.dataSource}
         renderRow={this.renderRow}

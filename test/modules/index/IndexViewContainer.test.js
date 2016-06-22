@@ -84,7 +84,7 @@ describe('IndexViewContainer', () => {
       }
     ];
     store.dispatch({
-      type: 'FETCHING_DONE',
+      type: 'THREADS_UPDATED',
       payload: threads
     });
     const renderer = TestUtils.createRenderer();

@@ -33,7 +33,8 @@ export default class MessageInput extends Component {
     dismissKeyboard();
     this.props.submit(this.state.message);
     this.setState({
-      message: ''
+      message: '',
+      height: 0
     });
   }
 
