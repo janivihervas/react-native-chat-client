@@ -8,8 +8,7 @@ export const colors = {
 };
 
 export const variables = {
-  paddingHorizontal: 15,
-  paddingVertical: 10
+  padding: 20
 };
 
 const styles = StyleSheet.create({
@@ -17,12 +16,16 @@ const styles = StyleSheet.create({
     flex: 1
   },
   paddingHorizontal: {
-    paddingLeft: variables.paddingVertical,
-    paddingRight: variables.paddingVertical
+    paddingLeft: variables.padding,
+    paddingRight: variables.padding
   },
   paddingVertical: {
-    paddingTop: variables.paddingVertical,
-    paddingBottom: variables.paddingVertical
+    paddingTop: variables.padding,
+    paddingBottom: variables.padding
+  },
+  list: {
+    paddingLeft: variables.padding,
+    paddingRight: variables.padding
   },
   header: {
     flexDirection: 'row',

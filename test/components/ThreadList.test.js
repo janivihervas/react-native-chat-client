@@ -56,8 +56,9 @@ describe('ThreadList', () => {
     const instance = renderer._instance._instance;
 
     assert.isFunction(instance.renderRow);
-    assert.deepEqual(instance.renderRow(threads.get(0)), (
+    assert.deepEqual(instance.renderRow(threads.get(0), 'section', 'row'), (
       <ThreadItem
+        key='thread-item-section-row'
         id={threads.get(0).get('id')}
         text={threads.get(0).getIn(['lastMessage', 'text'])}
         time={threads.get(0).getIn(['lastMessage', 'time'])}

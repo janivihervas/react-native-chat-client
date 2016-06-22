@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {Text, View, ListView, StyleSheet} from 'react-native';
 import Immutable, {List} from 'immutable';
 
-import common from '../styles/common';
+import common, {variables} from '../styles/common';
 import ThreadItem from './ThreadItem';
 
 export default class ThreadList extends Component {
@@ -26,9 +26,10 @@ export default class ThreadList extends Component {
     });
   }
 
-  renderRow(rowData) {
+  renderRow(rowData, sectionID, rowID) {
     return (
       <ThreadItem
+        key={`thread-item-${sectionID}-${rowID}`}
         id={rowData.get('id')}
         text={rowData.getIn(['lastMessage', 'text'])}
         time={rowData.getIn(['lastMessage', 'time'])}
@@ -37,6 +38,18 @@ export default class ThreadList extends Component {
         navigateToThreadView={this.props.navigateToThreadView}
       />
     );
+  }
+
+  renderSeparator(sectionID, rowID) {
+    return <View key={`thread-item-separator-${sectionID}-${rowID}`} style={[{height: 10}]} />;
+  }
+
+  renderHeader() {
+    return <View key='thread-list-header' style={[{height: variables.padding}]} />;
+  }
+
+  renderFooter() {
+    return <View key='thread-list-footer' style={[{height: variables.padding}]} />;
   }
 
   render() {
@@ -51,9 +64,12 @@ export default class ThreadList extends Component {
     // TODO: renderSeparator()
     return (
       <ListView
-        style={[common.fullSize, common.paddingHorizontal, common.paddingVertical]}
+        style={common.list}
         dataSource={this.state.dataSource}
         renderRow={this.renderRow}
+        renderSeparator={this.renderSeparator}
+        renderHeader={this.renderHeader}
+        renderFooter={this.renderFooter}
       />
     );
   }

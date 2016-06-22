@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     height: 60,
-    marginBottom: 10,
     padding: 5,
     borderWidth: 1,
     borderRadius: 5,
@@ -68,11 +67,9 @@ const styles = StyleSheet.create({
   },
   outer: {
     width: 50
-    // flex: 3
   },
   inner: {
     flex: 1,
     justifyContent: 'space-between'
-    // overflow: 'hidden'
   }
 });

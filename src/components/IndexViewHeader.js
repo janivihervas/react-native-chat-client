@@ -6,7 +6,7 @@ import common, {colors} from '../styles/common';
 
 export default class IndexViewHeader extends Component {
   render() {
-    const child = this.props.fetching ? <Spinner color={colors.white} style={styles.spinner}/> : null;
+    const spinner = this.props.fetching ? <Spinner color={colors.white} style={styles.spinner}/> : null;
 
     return (
       <View style={[common.header, common.paddingHorizontal]}>
@@ -14,7 +14,7 @@ export default class IndexViewHeader extends Component {
           <Text style={common.headerText}>React Native Chat Client</Text>
         </View>
         <View style={[styles.inner, {alignItems: 'flex-end'}]}>
-          {child}
+          {spinner}
         </View>
       </View>
     );

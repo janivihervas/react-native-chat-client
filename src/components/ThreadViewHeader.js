@@ -28,7 +28,7 @@ export default class ThreadViewHeader extends Component {
 
     return (
       <View style={[common.header, common.paddingHorizontal, {justifyContent: 'flex-start'}]}>
-        <View style={[styles.inner, {paddingRight: variables.paddingHorizontal}]} >
+        <View style={[styles.inner, {paddingRight: variables.padding}]} >
           <MaterialIcons name='arrow-back' size={20} color={colors.white} onPress={this.onPress} />
         </View>
         <View style={styles.inner}>
