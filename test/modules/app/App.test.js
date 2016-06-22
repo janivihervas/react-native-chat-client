@@ -43,11 +43,12 @@ describe('App', () => {
         navigateToIndexView={fn}
         navigateToThreadView={fn}
         currentUser={user}
+        threadID='test'
       />
     ));
     const el = renderer.getRenderOutput();
 
-    assert.deepEqual(el, <ThreadViewContainer />);
+    assert.deepEqual(el, <ThreadViewContainer currentUser={user} threadID='test' />);
   });
 
   it('should render error message if given wrong currentView prop', () => {
