@@ -23,6 +23,7 @@ export default class IndexView extends Component {
         <ThreadList
           navigateToThreadView={this.props.navigateToThreadView}
           threads={this.props.threads}
+          currentUser={this.props.currentUser}
         />
       </View>
     );
@@ -34,7 +35,8 @@ IndexView.propTypes = {
   threadsFetched: PropTypes.bool.isRequired,
   fetchThreads: PropTypes.func.isRequired,
   threads: PropTypes.instanceOf(List).isRequired,
-  fetching: PropTypes.bool.isRequired
+  fetching: PropTypes.bool.isRequired,
+  currentUser: PropTypes.string.isRequired
 };
 
 IndexView.displayName = 'IndexView';

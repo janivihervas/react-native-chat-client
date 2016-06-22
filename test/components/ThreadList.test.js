@@ -20,7 +20,7 @@ describe('ThreadList', () => {
 
   it('should render error message if no threads are given as props', () => {
     renderer.render((
-      <ThreadList threads={List([])} navigateToThreadView={fn}/>
+      <ThreadList threads={List([])} navigateToThreadView={fn} currentUser='user'/>
     ));
     const el = renderer.getRenderOutput();
 
@@ -36,7 +36,7 @@ describe('ThreadList', () => {
       {id: '1', lastMessage: {}, participants: []}
     ]);
     renderer.render((
-      <ThreadList threads={threads} navigateToThreadView={fn}/>
+      <ThreadList threads={threads} navigateToThreadView={fn} currentUser='user'/>
     ));
     const el = renderer.getRenderOutput();
 
@@ -50,7 +50,7 @@ describe('ThreadList', () => {
       {id: '1', lastMessage: {author: 'test', text: 'blaa', time: 0}, participants: ['0', '1']}
     ]);
     renderer.render((
-      <ThreadList threads={threads} navigateToThreadView={fn}/>
+      <ThreadList threads={threads} navigateToThreadView={fn} currentUser='user'/>
     ));
 
     const instance = renderer._instance._instance;
@@ -65,6 +65,7 @@ describe('ThreadList', () => {
         author={threads.get(0).getIn(['lastMessage', 'author'])}
         participants={threads.get(0).get('participants')}
         navigateToThreadView={fn}
+        currentUser='user'
       />
     ));
   });
@@ -74,7 +75,7 @@ describe('ThreadList', () => {
       {id: '1', lastMessage: {author: 'test', text: 'blaa'}, participants: ['0', '1']}
     ]);
     renderer.render((
-      <ThreadList threads={threads} navigateToThreadView={fn}/>
+      <ThreadList threads={threads} navigateToThreadView={fn} currentUser='user'/>
     ));
 
     const instance = renderer._instance._instance;

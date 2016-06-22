@@ -1,12 +1,13 @@
 import React, {Component, PropTypes} from 'react';
-import {Text} from 'react-native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export default class Avatar extends Component {
   render() {
+    const size = 25;
     if (this.props.many) {
-      return <Text>Many</Text>;
+      return <FontAwesome name='users' size={size} />;
     }
-    return <Text>One</Text>;
+    return <FontAwesome name='user' size={size} />;
   }
 }
 

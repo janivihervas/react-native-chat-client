@@ -24,7 +24,8 @@ export default connect(
     return {
       threads,
       threadsFetched: state.getIn(['threads', 'threadsFetched']),
-      fetching: state.getIn(['threads', 'fetching'])
+      fetching: state.getIn(['threads', 'fetching']),
+      currentUser: state.getIn(['app', 'currentUser', 'name'])
     };
   },
   (dispatch, ownProps) => ({

@@ -22,6 +22,7 @@ describe('IndexView', () => {
         fetchThreads={fn}
         threads={List([])}
         fetching={false}
+        currentUser='user'
       />
     ));
     const el = renderer.getRenderOutput();
@@ -34,6 +35,7 @@ describe('IndexView', () => {
         <ThreadList
           navigateToThreadView={fn}
           threads={List([])}
+          currentUser='user'
         />
       </View>
     ));
@@ -55,6 +57,7 @@ describe('IndexView', () => {
           fetchThreads={fetchThreads}
           threads={List([])}
           fetching={false}
+          currentUser='user'
         />
       ));
       return renderer._instance._instance;

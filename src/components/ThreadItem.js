@@ -18,7 +18,8 @@ export default class ThreadItem extends Component {
 
   render() {
     const participants = this.props.participants.toArray().sort().join(', ');
-    const {text, time, author} = this.props;
+    const {text, time} = this.props;
+    const author = this.props.currentUser === this.props.author ? 'You' : this.props.author;
     let fmtTime = moment(time);
     if (fmtTime.date() !== moment().date()) {
       fmtTime = fmtTime.format('D. MMM');
@@ -29,7 +30,7 @@ export default class ThreadItem extends Component {
     return (
       <TouchableOpacity onPress={this.onPress}>
         <View style={styles.container}>
-          <View style={[styles.outer, {alignItems: 'flex-start', justifyContent: 'center'}]}>
+          <View style={[styles.outer, {alignItems: 'center', justifyContent: 'center'}]}>
             <Avatar many={this.props.participants.size > 1} />
           </View>
           <View style={styles.inner}>
@@ -51,7 +52,8 @@ ThreadItem.propTypes = {
   text: PropTypes.string.isRequired,
   time: PropTypes.number.isRequired,
   author: PropTypes.string.isRequired,
-  navigateToThreadView: PropTypes.func.isRequired
+  navigateToThreadView: PropTypes.func.isRequired,
+  currentUser: PropTypes.string.isRequired
 };
 
 ThreadItem.displayName = 'ThreadItem';
@@ -61,6 +63,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: 60,
     padding: 5,
+    paddingLeft: 0,
     borderWidth: 1,
     borderRadius: 5,
     backgroundColor: colors.grey

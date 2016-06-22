@@ -36,6 +36,7 @@ export default class ThreadList extends Component {
         author={rowData.getIn(['lastMessage', 'author'])}
         participants={rowData.get('participants')}
         navigateToThreadView={this.props.navigateToThreadView}
+        currentUser={this.props.currentUser}
       />
     );
   }
@@ -61,7 +62,7 @@ export default class ThreadList extends Component {
         </View>
       );
     }
-    // TODO: renderSeparator()
+
     return (
       <ListView
         style={common.list}
@@ -77,7 +78,8 @@ export default class ThreadList extends Component {
 
 ThreadList.propTypes = {
   navigateToThreadView: PropTypes.func.isRequired,
-  threads: PropTypes.instanceOf(List).isRequired
+  threads: PropTypes.instanceOf(List).isRequired,
+  currentUser: PropTypes.string.isRequired
 };
 
 ThreadList.displayName = 'ThreadList';
