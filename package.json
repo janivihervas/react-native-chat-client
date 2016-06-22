@@ -1,7 +1,22 @@
 {
   "name": "ReactNativeChatClient",
   "version": "0.0.1",
-  "private": true,
+  "private": false,
+  "license": "MIT",
+  "bugs": "https://github.com/janivihervas/react-native-chat-client/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/janivihervas/react-native-chat-client"
+  },
+  "keywords": [
+    "React Native",
+    "Redux",
+    "Redux Loop",
+    "ImmutableJS",
+    "Mocha",
+    "Chai",
+    "Istanbul"
+  ],
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "mocha",
