@@ -8,6 +8,7 @@ import {assertReactElements} from '../../helpers';
 import ThreadView from '../../../src/modules/threadView/ThreadView';
 import ThreadViewHeader from '../../../src/components/ThreadViewHeader';
 import MessageList from '../../../src/components/MessageList';
+import MessageInput from '../../../src/components/MessageInput';
 
 describe('ThreadView', () => {
   it('should render ThreadViewHeader and MessageList', () => {
@@ -23,6 +24,7 @@ describe('ThreadView', () => {
         currentUser={user}
         messages={list}
         lastMessageTime={1}
+        submit={fn}
       />
     ));
     const el = renderer.getRenderOutput();
@@ -37,6 +39,9 @@ describe('ThreadView', () => {
         <MessageList
           currentUser={user}
           messages={list}
+        />
+        <MessageInput
+          submit={fn}
         />
       </View>
     ));

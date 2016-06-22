@@ -25,6 +25,9 @@ export default connect(
   dispatch => ({
     navigateToIndexView: () => {
       dispatch(navigate(VIEWS.INDEX_VIEW));
+    },
+    submit: message => {
+      console.log('message received: ' + message);
     }
   })
 )(ThreadView);
