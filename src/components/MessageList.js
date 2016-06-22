@@ -21,9 +21,9 @@ export default class MessageList extends Component {
     };
   }
 
-  componentDidMount() {
-    this.scrollToBottom();
-  }
+  // componentDidMount() {
+  //   this.scrollToBottom();
+  // }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
@@ -31,17 +31,18 @@ export default class MessageList extends Component {
     });
   }
 
-  componentDidUpdate() {
-    this.scrollToBottom();
-  }
+  // componentDidUpdate() {
+  //   this.scrollToBottom();
+  // }
 
   scrollToBottom() {
     const {listView} = this.refs;
     listView.requestAnimationFrame(() => {
       // keep this animated, because it seems to be hard to render
       // the initial view to be scrolled to bottom
+      // TODO: iOS is bugged
       listView.scrollTo({
-        y: listView.scrollProperties.contentLength
+        y: listView.getMetrics().contentLength
       });
     });
   }
@@ -80,6 +81,7 @@ export default class MessageList extends Component {
         renderSeparator={this.renderSeparator}
         renderHeader={this.renderHeader}
         renderFooter={this.renderFooter}
+        onLayout={this.scrollToBottom}
       />
     );
   }

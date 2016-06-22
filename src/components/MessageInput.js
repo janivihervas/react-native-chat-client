@@ -71,7 +71,8 @@ const styles = StyleSheet.create({
     borderTopWidth: 1
   },
   input: {
-    flex: 1
+    flex: 1,
+    borderBottomWidth: 1
   },
   icon: {
     marginLeft: variables.padding
