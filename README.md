@@ -39,4 +39,7 @@ npm run check-coverage
 ## License
 
 [MIT License](LICENSE)
- 
+
+## Credits
+
+Huge thanks to [Pepperoni - React Native Starter Kit](https://github.com/futurice/pepperoni-app-kit) for providing a boilerplate setup! 
